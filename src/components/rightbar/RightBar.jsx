@@ -1,6 +1,7 @@
 import React from "react";
 import './RightBar.css';
 import { Users } from '../../DummyData'
+import Online from "../online/Online";
 
 export default function RightBar() {
     return (
@@ -18,15 +19,9 @@ export default function RightBar() {
                         Online Friends
                     </h4>
                     <ul className="rightBarFriendList">
-                        <li className="rightBarFriend">
-                            <div className="rightBarProfileImgContainer">
-                                <img className="rightBarProfileImg" src="/assets/person/friend-2.jpg" alt="" />
-                                <span className="rightBarOnline"></span>
-                            </div>
-                            <span className="rightBarUsername">
-                                John Doloe
-                            </span>
-                        </li>
+                        {Users.map(el => (
+                            <Online user={el} key={el.id} />
+                        ))}
                     </ul>
                 </div>
             </div>
