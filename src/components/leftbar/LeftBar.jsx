@@ -1,6 +1,8 @@
 import React from "react";
 import { RssFeed, Chat, VideoCall, Group } from '@mui/icons-material'
 import './LeftBar.css'
+import CloseFriend from "../closeFriend/CloseFriend";
+import { Users } from '../../DummyData'
 
 export default function LeftBar() {
     return (
@@ -38,12 +40,11 @@ export default function LeftBar() {
                     </button>
                     <hr className="leftBarHr" />
                     <ul className="lefBarFriendList">
-                        <li className="leftBarFriend">
-                            <img className="leftBarFriendPhoto" src="/assets/person/friend-1.jpg" alt="" />
-                            <span className="leftBarFriendName">
-                                Jane
-                            </span>
-                        </li>
+                        {
+                            Users.map(el => (
+                                <CloseFriend key={el.id} user={el} />
+                            ))
+                        }
                     </ul>
                 </div>
             </div>

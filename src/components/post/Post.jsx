@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import './Post.css'
 import { MoreVert, FavoriteBorderOutlined, Favorite } from '@mui/icons-material'
 import { Users } from '../../DummyData'
 
 export default function Post({ post }) {
+    const [like, setLike] = useState(post.like)
+    const [isLike, setIsLike] = useState(false)
+
+    const likeHandler = () => {
+        setLike(isLike ? like - 1 : like + 1)
+        setIsLike(!isLike)
+    }
     return (
         <>
             <div className="post">
@@ -30,9 +37,17 @@ export default function Post({ post }) {
                     </div>
                     <div className="postBottom">
                         <div className="postBottomLeft">
-                            <FavoriteBorderOutlined className="postLikeIcon" />
-                            <Favorite className="postLikeIcon" sx={{ color: '#FF0B00' }} />
-                            <span className="postLikeCounter">{post.like} people like it</span>
+                            {
+                                isLike ? (
+                                    <Favorite className="postLikeIcon" onClick={likeHandler} sx={{ color: '#FF0B00' }} />
+                                ) : (
+                                    <FavoriteBorderOutlined onClick={likeHandler} className="postLikeIcon" />
+                                )
+                            }
+
+
+
+                            <span className="postLikeCounter">{like} people like it</span>
                         </div>
                         <div className="postBottomRight">
                             <span className="postCommentText">{post.comment} comments</span>
